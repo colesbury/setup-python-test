@@ -1,0 +1,21 @@
+name: Test setup-python
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: colesbury/setup-python@main  # TODO: @v5
+        with:
+          python-version: '3.13t'
+      # You can test your matrix by printing the current Python version
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - run: python -VVV
