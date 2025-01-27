@@ -1,0 +1,33 @@
+name: Test macOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 1
+        uses: Quansight-Labs/setup-python@v5
+        with:
+          python-version: "3.13t"
+
+      - name: Display Python version 1
+        run: |
+          python -c "import sys; print(sys.version)"
+          env
+          which pip
+          pip --version
+          pip install --upgrade pip
+          pip --version
+
+      - run: python -VVV
+
+      - run: |
+          python -m pip install numpy
+          python -c "import numpy; print(numpy.random.randn(10))"
