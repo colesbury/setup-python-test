@@ -3,9 +3,6 @@ name: Test  Python Versions 3.14
 on:
   workflow_dispatch:
 
-env:
-  ACTIONS_RUNNER_DEBUG: true
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -16,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: Quansight-Labs/setup-python@v5
+        uses: colesbury/setup-python@ft-wip
         with:
           python-version: "3.14.0ta4"
 
