@@ -2,6 +2,11 @@ name: Test  Python Versions 3.14
 
 on:
   workflow_dispatch:
+      inputs:
+        version:
+          description: 'Python version'
+          required: true
+
 
 jobs:
   build:
@@ -15,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: colesbury/setup-python@ft-wip
         with:
-          python-version: "3.14.0ta4"
+          python-version: ${{ inputs.version }}
 
       - name: Display Python version 1
         run: python -c "import sys; print(sys.version)"
