@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: Quansight-Labs/setup-python@v5
         with:
-          python-version: "3.14.0a4t"
+          python-version: "3.14.0ta4"
 
       - name: Display Python version 1
         run: python -c "import sys; print(sys.version)"
