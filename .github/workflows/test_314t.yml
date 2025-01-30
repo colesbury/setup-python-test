@@ -3,6 +3,9 @@ name: Test  Python Versions 3.14
 on:
   workflow_dispatch:
 
+env:
+  ACTIONS_RUNNER_DEBUG: true
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
