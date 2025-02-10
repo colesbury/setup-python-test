@@ -1,0 +1,68 @@
+name: Test cache inputs
+
+on: [workflow_dispatch]
+
+jobs:
+   test-pip-cache:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: priyagupta108/setup-python@test-pr-973
+        id: test1
+        with:
+          python-version: '3.13.1t'
+          cache: 'pip'
+
+      - run: echo '${{ steps.test1.outputs.python-version }}'    
+
+      - run: pip install -r requirements.txt
+
+   test-poetry-cache:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry  
+     
+      - name: Set up Python
+        uses: priyagupta108/setup-python@test-pr-973
+        id: test2
+        with:
+          python-version: '3.13.1t'
+          cache: 'poetry' 
+
+      - run: echo '${{ steps.test2.outputs.python-version }}'
+
+      - run: poetry install --no-root
+  
+   test-pipenv-cache:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+     
+      - name: Set up Python
+        uses: priyagupta108/setup-python@test-pr-973
+        id: test3
+        with:
+          python-version: '3.13.1t'
+          cache: 'pipenv'
+
+      - run: echo '${{ steps.test3.outputs.python-version }}'  
+
+      - name: Install pipenv
+
+        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
+      - run: pipenv install
