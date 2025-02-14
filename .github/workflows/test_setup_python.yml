@@ -1,4 +1,4 @@
-name: Test  Python Versions 3.14
+name: Test setup-python (ft-wip)
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: ${{ inputs.version }}
 
-      - name: Display Python version 1
+      - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
       - run: python -VVV
